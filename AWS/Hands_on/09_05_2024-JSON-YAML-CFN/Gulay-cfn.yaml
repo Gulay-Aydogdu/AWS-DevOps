@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: |
+  This is a template launches an instance with security group which ssh 22 port.
+  
+Resources:
+  MySecGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allows SSH 22 port # Required
+      GroupName: Gulay-sec-group-oktay
+      SecurityGroupIngress: 
+        - CidrIp: 0.0.0.0/0
+          FromPort: 22
+          IpProtocol: tcp
+          ToPort: 22
+
+  MyInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0182f373e66f89c85
+      InstanceType: t2.micro
+      KeyName: Gulay-aws-ec2
+      SecurityGroupIds:
+        - !Ref MySecGroup
+      Tags:
+        - Key: Name
+          Value: gulay-cfn-instance
+      
+
+  
