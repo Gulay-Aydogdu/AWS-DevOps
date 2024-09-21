@@ -1,1 +1,1 @@
-# AWS-DevOps
+# clarusway-aws-devops-DE-tr-09
