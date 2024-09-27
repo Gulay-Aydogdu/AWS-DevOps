@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: |
+  I created this cfn in my free time.
+  
+
+Resources:
+  MyEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0ebfd941bbafe70c6
+      InstanceType: t2.micro
+      KeyName: Gulay-aws
+      SecurityGroups: 
+        - !Ref MySG
+      Tags: 
+        - Key: Name
+          Value: cfn-1
+  
+  MySG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow SSH # Required
+      SecurityGroupIngress: 
+        - CidrIp: 0.0.0.0/0
+          FromPort: 22
+          IpProtocol: tcp
+          ToPort: 22
+      Tags: 
+        - Key: Name
+          Value: cfnSG
+      
+  
