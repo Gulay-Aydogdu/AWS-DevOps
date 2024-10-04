@@ -3,6 +3,15 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: |
   I created this cfn in my free time.
   
+Parameters:
+  ParameterKeypair:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: Select your keypair to connect with SSH.
+
+  ParameterSG:
+    Description: 22 port
+    Type: AWS::EC2::SecurityGroup::GroupName
+    
 
 Resources:
   MyEC2:
@@ -10,24 +19,18 @@ Resources:
     Properties:
       ImageId: ami-0ebfd941bbafe70c6
       InstanceType: t2.micro
-      KeyName: Gulay-aws
+      KeyName: !Ref ParameterKeypair
       SecurityGroups: 
-        - !Ref MySG
+        - !Ref ParameterSG
       Tags: 
         - Key: Name
           Value: cfn-1
+      UserData: 
+        !Base64 |
+        #! /bin/bash
+        yum update -y 
+        yum install python3
+        pip3 install flask
   
-  MySG:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Allow SSH # Required
-      SecurityGroupIngress: 
-        - CidrIp: 0.0.0.0/0
-          FromPort: 22
-          IpProtocol: tcp
-          ToPort: 22
-      Tags: 
-        - Key: Name
-          Value: cfnSG
       
   
