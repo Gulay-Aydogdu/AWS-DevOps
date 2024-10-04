@@ -20,10 +20,10 @@ with app.app_context():
         ("gokhan", "gokhan@google.com"),
         ("musa", "musa@bmw.com"),
         ("abdullah", "abdullah@mercedes.com"),
-	    ("gulay", "gulay@porche.com")
-        ("sumeyra", "sumeyra@microsoft.com") 
-        ("ozan", "ozan@porche.com")
-        ("ahmet", "ahmet@huwaei.com");
+	    ("gulay", "gulay@porsche.com"),
+        ("sumeyra", "sumeyra@microsoft.com"),
+        ("ozan", "ozan@porsche.com"),
+        ("ahmet", "ahmet@huawei.com");
         """)
     db.session.execute(drop_table)
     db.session.execute(users_table)
